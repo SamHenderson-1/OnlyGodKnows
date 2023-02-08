@@ -21,7 +21,11 @@ namespace StarterAssets
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
 
-		[Space(10)]
+        [Space(10)]
+        [Tooltip("Range at which the player can interact with NPCs and objects")]
+		public float interactRange = 2f;
+
+        [Space(10)]
 		[Tooltip("The height the player can jump")]
 		public float JumpHeight = 1.2f;
 		[Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
@@ -115,6 +119,8 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			if(Keyboard.current.eKey.wasPressedThisFrame)
+				Interact();
 		}
 
 		private void LateUpdate()
@@ -197,6 +203,16 @@ namespace StarterAssets
 			// move the player
 			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 		}
+
+		private void Interact() {
+			Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
+			foreach (Collider collider in colliderArray)
+			{
+				if (collider.TryGetComponent(out NPCInteractable npcInteractable)) { 
+					npcInteractable.Interact();
+				}
+			}
+        }
 
 		private void JumpAndGravity()
 		{
