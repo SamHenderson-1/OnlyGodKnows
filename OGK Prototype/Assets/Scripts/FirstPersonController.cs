@@ -121,13 +121,13 @@ namespace StarterAssets
 			_fallTimeoutDelta = FallTimeout;
 
             inventory = new Inventory();
-            uiInventory.SetInventory(inventory);
-            ItemWorld.SpawnItemWorld(new Vector3(20, 0, 20), new Item { itemType = Item.ItemType.Key, amount = 1 });
-            ItemWorld.SpawnItemWorld(new Vector3(-20, 0, 20), new Item { itemType = Item.ItemType.Medicine, amount = 1 });
-            ItemWorld.SpawnItemWorld(new Vector3(20, 0, -20), new Item { itemType = Item.ItemType.Ammo, amount = 1 });
+            //  uiInventory.SetInventory(inventory);
+            //  ItemWorld.SpawnItemWorld(new Vector3(20, 0, 20), new Item { itemType = Item.ItemType.Key, amount = 1 });
+            //  ItemWorld.SpawnItemWorld(new Vector3(-20, 0, 20), new Item { itemType = Item.ItemType.Medicine, amount = 1 });
+            //  ItemWorld.SpawnItemWorld(new Vector3(20, 0, -20), new Item { itemType = Item.ItemType.Ammo, amount = 1 });
         }
 
-		private void Update()
+        private void Update()
 		{
 			JumpAndGravity();
 			GroundedCheck();
