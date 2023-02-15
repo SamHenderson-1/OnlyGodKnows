@@ -11,12 +11,13 @@ public class NPCInteractable : MonoBehaviour, IInteractable
         return interactText;
     }
 
-    public void Interact() {
+    public void Interact(Transform interactorTransform)
+    {
         Debug.Log("Interact!");
     }
 
-    public void Interact(Transform interactorTransform)
+    public Transform GetTransform() 
     {
-        throw new System.NotImplementedException();
+        return transform;
     }
 }
