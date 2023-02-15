@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
 {
-    private List<Transform> npcList;
     float interactRange = 2f;
 
 
@@ -12,37 +11,34 @@ public class PlayerInteract : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
-            foreach (Collider collider in colliderArray)
-            {
-                if (collider.TryGetComponent(out IInteractable interactable))
-                    interactable.Interact(transform);
-            }
+            IInteractable interactable = GetInteractableObject();
+            if (interactable != null)
+                interactable.Interact(transform);
         }
     }
 
-    public NPCInteractable GetInteractableObject()
+    public IInteractable GetInteractableObject()
     {
-        List<NPCInteractable> npcInteractableList = new List<NPCInteractable>();
+        List<IInteractable> interactableList = new List<IInteractable>();
         Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
         foreach (Collider collider in colliderArray)
         {
-            if (collider.TryGetComponent(out NPCInteractable npcInteractable))
-                npcInteractableList.Add(npcInteractable); 
+            if (collider.TryGetComponent(out IInteractable interactable))
+                interactableList.Add(interactable); 
         }
-        
-        NPCInteractable closestNPCInteractable = null;
-        foreach (NPCInteractable npcInteractable in npcInteractableList)
+
+        IInteractable closestInteractable = null;
+        foreach (IInteractable interactable in interactableList)
         {
-            if (closestNPCInteractable == null)
-                closestNPCInteractable = npcInteractable;
+            if (closestInteractable == null)
+                closestInteractable = interactable;
             else 
             {
-                if (Vector3.Distance(transform.position, npcInteractable.transform.position) <
-                    Vector3.Distance(transform.position, closestNPCInteractable.transform.position)) 
-                    closestNPCInteractable = npcInteractable;
+                if (Vector3.Distance(transform.position, interactable.GetTransform().position) <
+                    Vector3.Distance(transform.position, closestInteractable.GetTransform().position)) 
+                    closestInteractable = interactable;
             }
         }
-        return closestNPCInteractable;
+        return closestInteractable;
     }
 }

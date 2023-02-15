@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorInteractable : MonoBehaviour, IInteractable
+public class DoorInteractable : MonoBehaviour, IInteractable, IDoor
 {
-    private Animator animator;
-    private bool isOpen;
+    private bool closed = true;
+
 
     public string GetInteractText()
     {
@@ -17,16 +17,17 @@ public class DoorInteractable : MonoBehaviour, IInteractable
         ToggleDoor();
     }
 
-    private void Awake()
+    public void ToggleDoor()
     {
-        animator = GetComponent<Animator>();
+        Debug.Log("Door Open");
+        closed = !closed;
+        gameObject.SetActive(closed);
+
+        
     }
 
-     private void ToggleDoor()
+    public Transform GetTransform()
     {
-        isOpen = !isOpen;
-        animator.SetBool("isOpen", isOpen);
+        return transform;
     }
-
-
 }

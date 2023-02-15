@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -25,8 +26,11 @@ namespace StarterAssets
         [Tooltip("Range at which the player can interact with NPCs and objects")]
 		public float interactRange = 2f;
 
+
         [Space(10)]
-		[Tooltip("The height the player can jump")]
+        [Tooltip("Determines whether or not the player can jump")]
+        public bool CanJump = false;
+        [Tooltip("The height the player can jump")]
 		public float JumpHeight = 1.2f;
 		[Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
 		public float Gravity = -15.0f;
@@ -78,7 +82,10 @@ namespace StarterAssets
 
 		private const float _threshold = 0.01f;
 
-		private bool IsCurrentDeviceMouse
+		[SerializeField] private UI_Inventory uiInventory;		
+		public Inventory inventory;
+
+        private bool IsCurrentDeviceMouse
 		{
 			get
 			{
@@ -97,9 +104,9 @@ namespace StarterAssets
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
-		}
+        }
 
-		private void Start()
+        private void Start()
 		{
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
@@ -112,7 +119,13 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
-		}
+
+            inventory = new Inventory();
+            uiInventory.SetInventory(inventory);
+            ItemWorld.SpawnItemWorld(new Vector3(20, 0, 20), new Item { itemType = Item.ItemType.Key, amount = 1 });
+            ItemWorld.SpawnItemWorld(new Vector3(-20, 0, 20), new Item { itemType = Item.ItemType.Medicine, amount = 1 });
+            ItemWorld.SpawnItemWorld(new Vector3(20, 0, -20), new Item { itemType = Item.ItemType.Ammo, amount = 1 });
+        }
 
 		private void Update()
 		{
@@ -205,60 +218,84 @@ namespace StarterAssets
 		}
 
 		private void Interact() {
-			Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
-			foreach (Collider collider in colliderArray)
-			{
-				if (collider.TryGetComponent(out NPCInteractable npcInteractable)) { 
-					npcInteractable.Interact();
-				}
-			}
+            IInteractable interactable = GetInteractableObject();
+            if (interactable != null)
+                interactable.Interact(transform);
         }
 
-		private void JumpAndGravity()
+        public IInteractable GetInteractableObject()
+        {
+            List<IInteractable> interactableList = new List<IInteractable>();
+            Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
+            foreach (Collider collider in colliderArray)
+            {
+                if (collider.TryGetComponent(out IInteractable interactable))
+                    interactableList.Add(interactable);
+            }
+
+            IInteractable closestInteractable = null;
+            foreach (IInteractable interactable in interactableList)
+            {
+                if (closestInteractable == null)
+                    closestInteractable = interactable;
+                else
+                {
+                    if (Vector3.Distance(transform.position, interactable.GetTransform().position) <
+                        Vector3.Distance(transform.position, closestInteractable.GetTransform().position))
+                        closestInteractable = interactable;
+                }
+            }
+            return closestInteractable;
+        }
+
+        private void JumpAndGravity()
 		{
-			if (Grounded)
+			if (CanJump)
 			{
-				// reset the fall timeout timer
-				_fallTimeoutDelta = FallTimeout;
-
-				// stop our velocity dropping infinitely when grounded
-				if (_verticalVelocity < 0.0f)
+				if (Grounded)
 				{
-					_verticalVelocity = -2f;
+					// reset the fall timeout timer
+					_fallTimeoutDelta = FallTimeout;
+
+					// stop our velocity dropping infinitely when grounded
+					if (_verticalVelocity < 0.0f)
+					{
+						_verticalVelocity = -2f;
+					}
+
+					// Jump
+					if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+					{
+						// the square root of H * -2 * G = how much velocity needed to reach desired height
+						_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+					}
+
+					// jump timeout
+					if (_jumpTimeoutDelta >= 0.0f)
+					{
+						_jumpTimeoutDelta -= Time.deltaTime;
+					}
+				}
+				else
+				{
+					// reset the jump timeout timer
+					_jumpTimeoutDelta = JumpTimeout;
+
+					// fall timeout
+					if (_fallTimeoutDelta >= 0.0f)
+					{
+						_fallTimeoutDelta -= Time.deltaTime;
+					}
+
+					// if we are not grounded, do not jump
+					_input.jump = false;
 				}
 
-				// Jump
-				if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+				// apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
+				if (_verticalVelocity < _terminalVelocity)
 				{
-					// the square root of H * -2 * G = how much velocity needed to reach desired height
-					_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+					_verticalVelocity += Gravity * Time.deltaTime;
 				}
-
-				// jump timeout
-				if (_jumpTimeoutDelta >= 0.0f)
-				{
-					_jumpTimeoutDelta -= Time.deltaTime;
-				}
-			}
-			else
-			{
-				// reset the jump timeout timer
-				_jumpTimeoutDelta = JumpTimeout;
-
-				// fall timeout
-				if (_fallTimeoutDelta >= 0.0f)
-				{
-					_fallTimeoutDelta -= Time.deltaTime;
-				}
-
-				// if we are not grounded, do not jump
-				_input.jump = false;
-			}
-
-			// apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
-			if (_verticalVelocity < _terminalVelocity)
-			{
-				_verticalVelocity += Gravity * Time.deltaTime;
 			}
 		}
 
