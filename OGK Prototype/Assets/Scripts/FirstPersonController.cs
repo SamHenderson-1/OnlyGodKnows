@@ -122,9 +122,9 @@ namespace StarterAssets
 
             inventory = new Inventory();
             uiInventory.SetInventory(inventory);
-            ItemWorld.SpawnItemWorld(new Vector3(20, 0, 20), new Item { itemType = Item.ItemType.Key, amount = 1 });
-            ItemWorld.SpawnItemWorld(new Vector3(-20, 0, 20), new Item { itemType = Item.ItemType.Medicine, amount = 1 });
-            ItemWorld.SpawnItemWorld(new Vector3(20, 0, -20), new Item { itemType = Item.ItemType.Ammo, amount = 1 });
+            ItemWorld.SpawnItemWorld(new Vector3(10, 0, 20), new Item { itemType = Item.ItemType.Key, amount = 1 });
+            ItemWorld.SpawnItemWorld(new Vector3(-10, 0, 10), new Item { itemType = Item.ItemType.Medicine, amount = 1 });
+            ItemWorld.SpawnItemWorld(new Vector3(10, 0, -10), new Item { itemType = Item.ItemType.Ammo, amount = 1 });
         }
 
 		private void Update()
@@ -221,6 +221,15 @@ namespace StarterAssets
             IInteractable interactable = GetInteractableObject();
             if (interactable != null)
                 interactable.Interact(transform);
+        }
+
+        private void OnTriggerEnter(Collider collider)
+        {
+            ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
+			if (itemWorld != null) {
+				inventory.AddItem(itemWorld.GetItem());
+				itemWorld.DestroySelf();
+			}
         }
 
         public IInteractable GetInteractableObject()
