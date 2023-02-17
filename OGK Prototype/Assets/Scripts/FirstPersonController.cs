@@ -259,9 +259,9 @@ namespace StarterAssets
 
         private void JumpAndGravity()
 		{
-			if (CanJump)
+			if (Grounded)
 			{
-				if (Grounded)
+				if (CanJump)
 				{
 					// reset the fall timeout timer
 					_fallTimeoutDelta = FallTimeout;
@@ -285,28 +285,29 @@ namespace StarterAssets
 						_jumpTimeoutDelta -= Time.deltaTime;
 					}
 				}
-				else
+			}
+			else
+			{
+				// reset the jump timeout timer
+				_jumpTimeoutDelta = JumpTimeout;
+
+				// fall timeout
+				if (_fallTimeoutDelta >= 0.0f)
 				{
-					// reset the jump timeout timer
-					_jumpTimeoutDelta = JumpTimeout;
-
-					// fall timeout
-					if (_fallTimeoutDelta >= 0.0f)
-					{
-						_fallTimeoutDelta -= Time.deltaTime;
-					}
-
-					// if we are not grounded, do not jump
-					_input.jump = false;
+					_fallTimeoutDelta -= Time.deltaTime;
 				}
 
-				// apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
-				if (_verticalVelocity < _terminalVelocity)
-				{
-					_verticalVelocity += Gravity * Time.deltaTime;
-				}
+				// if we are not grounded, do not jump
+				_input.jump = false;
+			}
+
+			// apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
+			if (_verticalVelocity < _terminalVelocity)
+			{
+				_verticalVelocity += Gravity * Time.deltaTime;
 			}
 		}
+		
 
 		private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
 		{

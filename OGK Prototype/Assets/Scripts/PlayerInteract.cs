@@ -4,41 +4,27 @@ using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
 {
-    float interactRange = 2f;
+    private GameObject cam;
+    [SerializeField]
+    private float distance = 3f;
+    [SerializeField]
+    private LayerMask mask;
 
-
-    private void Update()
+    void Start()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            IInteractable interactable = GetInteractableObject();
-            if (interactable != null)
-                interactable.Interact(transform);
-        }
+        cam = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
-    public IInteractable GetInteractableObject()
+    void Update()
     {
-        List<IInteractable> interactableList = new List<IInteractable>();
-        Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
-        foreach (Collider collider in colliderArray)
-        {
-            if (collider.TryGetComponent(out IInteractable interactable))
-                interactableList.Add(interactable); 
-        }
-
-        IInteractable closestInteractable = null;
-        foreach (IInteractable interactable in interactableList)
-        {
-            if (closestInteractable == null)
-                closestInteractable = interactable;
-            else 
-            {
-                if (Vector3.Distance(transform.position, interactable.GetTransform().position) <
-                    Vector3.Distance(transform.position, closestInteractable.GetTransform().position)) 
-                    closestInteractable = interactable;
+        Ray ray = new Ray(transform.position + new Vector3(0, 1, 0), cam.transform.forward);
+        Debug.DrawRay(ray.origin, ray.direction * distance);
+        RaycastHit hitInfo;
+        if (Physics.Raycast(ray, out hitInfo, distance, mask)) {
+            if(hitInfo.collider.GetComponent<Interactable>() != null) {
+                Debug.Log(hitInfo.collider.GetComponent<Interactable>().promptMessage);
             }
         }
-        return closestInteractable;
+
     }
 }

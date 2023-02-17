@@ -2,22 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCInteractable : MonoBehaviour, IInteractable
+public class NPCInteractable : Interactable
 {
-    [SerializeField] private string interactText;
+    [SerializeField] 
+    private string dialogue;
 
-    public string GetInteractText()
+    protected override void Interact()
     {
-        return interactText;
-    }
-
-    public void Interact(Transform interactorTransform)
-    {
-        Debug.Log("Interact!");
-    }
-
-    public Transform GetTransform() 
-    {
-        return transform;
+        Debug.Log("Interacted with " + gameObject.name);
+        Debug.Log(dialogue);
     }
 }
