@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class NPCInteractable : Interactable
 {
-    [SerializeField] 
+
+    [SerializeField]
+    private TextMeshProUGUI npcText;
+    [SerializeField]
     private string dialogue;
+
 
     protected override void Interact()
     {
-        Debug.Log("Interacted with " + gameObject.name);
-        Debug.Log(dialogue);
+        npcText.text = dialogue;
     }
 }

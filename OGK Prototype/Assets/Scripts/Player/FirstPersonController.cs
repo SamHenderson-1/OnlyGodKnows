@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
@@ -24,7 +25,11 @@ namespace StarterAssets
 
         [Space(10)]
         [Tooltip("Range at which the player can interact with NPCs and objects")]
-		public float interactRange = 2f;
+        public float interactionRange = 3f;
+        [Tooltip("Object layer that can be interacted with")]
+        public LayerMask mask;
+        [Tooltip("UI settings for the player")]
+        public PlayerUI playerUI;
 
 
         [Space(10)]
@@ -112,12 +117,13 @@ namespace StarterAssets
 			_input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 			_playerInput = GetComponent<PlayerInput>();
+            playerUI = GetComponent<PlayerUI>();
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
 
-			// reset our timeouts on start
-			_jumpTimeoutDelta = JumpTimeout;
+            // reset our timeouts on start
+            _jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
 
             inventory = new Inventory();
@@ -132,8 +138,7 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
-			if(Keyboard.current.eKey.wasPressedThisFrame)
-				Interact();
+			CheckForInteractions();     
 		}
 
 		private void LateUpdate()
@@ -217,10 +222,26 @@ namespace StarterAssets
 			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 		}
 
-		private void Interact() {
-            IInteractable interactable = GetInteractableObject();
-            if (interactable != null)
-                interactable.Interact(transform);
+        private void CheckForInteractions()
+        {
+            playerUI.UpdateText(string.Empty);
+            Ray ray = new Ray(transform.position + new Vector3(0, 1, 0), _mainCamera.transform.forward);
+            Debug.DrawRay(ray.origin, ray.direction * interactionRange);
+			RaycastHit hitInfo;
+            if (Physics.Raycast(ray, out hitInfo, interactionRange, mask))
+            {
+                if (hitInfo.collider.GetComponent<Interactable>() != null)
+                {
+                    Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
+                    playerUI.UpdateText(interactable.promptMessage);
+                    if (Keyboard.current.eKey.wasPressedThisFrame)
+                    {
+                        Debug.Log("Interacted");
+                        interactable.BaseInteract();
+                        playerUI.UpdateText("");
+                    }
+                }
+            }
         }
 
         private void OnTriggerEnter(Collider collider)
@@ -232,59 +253,35 @@ namespace StarterAssets
 			}
         }
 
-        public IInteractable GetInteractableObject()
-        {
-            List<IInteractable> interactableList = new List<IInteractable>();
-            Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
-            foreach (Collider collider in colliderArray)
-            {
-                if (collider.TryGetComponent(out IInteractable interactable))
-                    interactableList.Add(interactable);
-            }
-
-            IInteractable closestInteractable = null;
-            foreach (IInteractable interactable in interactableList)
-            {
-                if (closestInteractable == null)
-                    closestInteractable = interactable;
-                else
-                {
-                    if (Vector3.Distance(transform.position, interactable.GetTransform().position) <
-                        Vector3.Distance(transform.position, closestInteractable.GetTransform().position))
-                        closestInteractable = interactable;
-                }
-            }
-            return closestInteractable;
-        }
-
         private void JumpAndGravity()
 		{
 			if (Grounded)
 			{
+				// reset the fall timeout timer
+				_fallTimeoutDelta = FallTimeout;
+
+				// stop our velocity dropping infinitely when grounded
+				if (_verticalVelocity < 0.0f)
+				{
+					_verticalVelocity = -2f;
+				}
 				if (CanJump)
 				{
-					// reset the fall timeout timer
-					_fallTimeoutDelta = FallTimeout;
-
-					// stop our velocity dropping infinitely when grounded
-					if (_verticalVelocity < 0.0f)
-					{
-						_verticalVelocity = -2f;
-					}
-
 					// Jump
 					if (_input.jump && _jumpTimeoutDelta <= 0.0f)
 					{
+						Debug.Log("Jumped");
 						// the square root of H * -2 * G = how much velocity needed to reach desired height
 						_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
 					}
-
-					// jump timeout
-					if (_jumpTimeoutDelta >= 0.0f)
-					{
-						_jumpTimeoutDelta -= Time.deltaTime;
-					}
 				}
+
+				// jump timeout
+				if (_jumpTimeoutDelta >= 0.0f)
+				{
+					_jumpTimeoutDelta -= Time.deltaTime;
+				}
+				
 			}
 			else
 			{
