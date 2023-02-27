@@ -5,4 +5,5 @@ using UnityEngine;
 public interface IDoor
 {
     void ToggleDoor();
+    IEnumerator Teleport();
 }

@@ -13,6 +13,7 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool interacted;
+		public bool inventoryJournalOpened;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -48,10 +49,15 @@ namespace StarterAssets
 		public void OnInteract(InputValue value) { 
 			InteractInput(value.isPressed);
 		}
+
+        public void OnInventoryJournal(InputValue value)
+        {
+            InventoryJournalInput(value.isPressed);
+        }
 #endif
 
 
-		public void MoveInput(Vector2 newMoveDirection)
+        public void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;
 		} 
@@ -74,8 +80,13 @@ namespace StarterAssets
 		public void InteractInput(bool interacting) { 
 			interacted = interacting;
 		}
-		
-		private void OnApplicationFocus(bool hasFocus)
+
+        public void InventoryJournalInput(bool newInventoryJournalState)
+        {
+            inventoryJournalOpened = newInventoryJournalState;
+        }
+
+        private void OnApplicationFocus(bool hasFocus)
 		{
 			SetCursorState(cursorLocked);
 		}

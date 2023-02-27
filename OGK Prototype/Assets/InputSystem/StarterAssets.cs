@@ -80,6 +80,15 @@ public partial class @StarterAssetsClass : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inventory/Journal"",
+                    ""type"": ""Button"",
+                    ""id"": ""5a676da4-3955-431b-a4b4-33b4b639947b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -289,6 +298,28 @@ public partial class @StarterAssetsClass : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Flashlight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""765e4ec8-d89c-4596-8f01-e7a3453ea0a8"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Inventory/Journal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8775652c-c91a-4cb6-8a08-fd2fc53d0973"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Inventory/Journal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -869,6 +900,7 @@ public partial class @StarterAssetsClass : IInputActionCollection2, IDisposable
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Flashlight = m_Player.FindAction("Flashlight", throwIfNotFound: true);
+        m_Player_InventoryJournal = m_Player.FindAction("Inventory/Journal", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -946,6 +978,7 @@ public partial class @StarterAssetsClass : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Flashlight;
+    private readonly InputAction m_Player_InventoryJournal;
     public struct PlayerActions
     {
         private @StarterAssetsClass m_Wrapper;
@@ -956,6 +989,7 @@ public partial class @StarterAssetsClass : IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Flashlight => m_Wrapper.m_Player_Flashlight;
+        public InputAction @InventoryJournal => m_Wrapper.m_Player_InventoryJournal;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -983,6 +1017,9 @@ public partial class @StarterAssetsClass : IInputActionCollection2, IDisposable
                 @Flashlight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlashlight;
                 @Flashlight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlashlight;
                 @Flashlight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlashlight;
+                @InventoryJournal.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryJournal;
+                @InventoryJournal.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryJournal;
+                @InventoryJournal.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryJournal;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1005,6 +1042,9 @@ public partial class @StarterAssetsClass : IInputActionCollection2, IDisposable
                 @Flashlight.started += instance.OnFlashlight;
                 @Flashlight.performed += instance.OnFlashlight;
                 @Flashlight.canceled += instance.OnFlashlight;
+                @InventoryJournal.started += instance.OnInventoryJournal;
+                @InventoryJournal.performed += instance.OnInventoryJournal;
+                @InventoryJournal.canceled += instance.OnInventoryJournal;
             }
         }
     }
@@ -1158,6 +1198,7 @@ public partial class @StarterAssetsClass : IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnFlashlight(InputAction.CallbackContext context);
+        void OnInventoryJournal(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

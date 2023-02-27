@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
@@ -29,14 +30,16 @@ namespace StarterAssets
         [Tooltip("Object layer that can be interacted with")]
         public LayerMask mask;
         [Tooltip("UI settings for the player")]
-        public PlayerUI playerUI;
+        public PlayerUI playerUI; 
+		[Tooltip("UI settings for the inventory and journal")]
+        public GameObject menuIJ;
 
 
         [Space(10)]
         [Tooltip("Determines whether or not the player can jump")]
         public bool CanJump = false;
         [Tooltip("The height the player can jump")]
-		public float JumpHeight = 1.2f;
+		public float JumpHeight = 0f;
 		[Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
 		public float Gravity = -15.0f;
 
@@ -77,6 +80,9 @@ namespace StarterAssets
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
 
+		public bool disabled;
+
+		private bool uiActive = false;
 	
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 		private PlayerInput _playerInput;
@@ -128,17 +134,36 @@ namespace StarterAssets
 
             inventory = new Inventory();
             uiInventory.SetInventory(inventory);
+
+            menuIJ.SetActive(uiActive);
+
+            ItemWorld.SpawnItemWorld(new Vector3(10, 0, 10), new Item { itemType = Item.ItemType.Key, amount = 1 });
+            ItemWorld.SpawnItemWorld(new Vector3(-10, 0, -10), new Item { itemType = Item.ItemType.Key, amount = 1 });
+            ItemWorld.SpawnItemWorld(new Vector3(10, 0, -10), new Item { itemType = Item.ItemType.Key, amount = 1 });
         }
 
-		private void Update()
+        private void Update()
 		{
-			JumpAndGravity();
-			GroundedCheck();
-			Move();
-			CheckForInteractions();     
+			if (!disabled)
+			{
+				JumpAndGravity();
+				GroundedCheck();
+				Move();
+				CheckForInteractions();
+				CheckForInventoryJournal();
+			} 
 		}
 
-		private void LateUpdate()
+        private void CheckForInventoryJournal()
+        {
+            if(Keyboard.current.iKey.wasPressedThisFrame)
+			{
+				uiActive = !uiActive;
+				menuIJ.SetActive(uiActive);
+			}
+        }
+
+        private void LateUpdate()
 		{
 			CameraRotation();
 		}
@@ -240,6 +265,8 @@ namespace StarterAssets
                 }
             }
         }
+
+
 
         private void OnTriggerEnter(Collider collider)
         {

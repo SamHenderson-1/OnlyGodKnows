@@ -15,5 +15,12 @@ public class NPCInteractable : Interactable
     protected override void Interact()
     {
         npcText.text = dialogue;
+        StartCoroutine("Erase");
+    }
+
+    private IEnumerator Erase()
+    {
+        yield return new WaitForSeconds(5f);
+        npcText.text = "";
     }
 }
