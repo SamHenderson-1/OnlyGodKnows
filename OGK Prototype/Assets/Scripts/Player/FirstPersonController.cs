@@ -135,11 +135,7 @@ namespace StarterAssets
             inventory = new Inventory();
             uiInventory.SetInventory(inventory);
 
-            menuIJ.SetActive(uiActive);
-
-            ItemWorld.SpawnItemWorld(new Vector3(10, 0, 10), new Item { itemType = Item.ItemType.Key, amount = 1 });
-            ItemWorld.SpawnItemWorld(new Vector3(-10, 0, -10), new Item { itemType = Item.ItemType.Key, amount = 1 });
-            ItemWorld.SpawnItemWorld(new Vector3(10, 0, -10), new Item { itemType = Item.ItemType.Key, amount = 1 });
+			menuIJ.SetActive(uiActive);
         }
 
         private void Update()
@@ -165,7 +161,8 @@ namespace StarterAssets
 
         private void LateUpdate()
 		{
-			CameraRotation();
+			if(!disabled)
+				CameraRotation();
 		}
 
 		private void GroundedCheck()
@@ -264,17 +261,6 @@ namespace StarterAssets
                     }
                 }
             }
-        }
-
-
-
-        private void OnTriggerEnter(Collider collider)
-        {
-            ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
-			if (itemWorld != null) {
-				inventory.AddItem(itemWorld.GetItem());
-				itemWorld.DestroySelf();
-			}
         }
 
         private void JumpAndGravity()

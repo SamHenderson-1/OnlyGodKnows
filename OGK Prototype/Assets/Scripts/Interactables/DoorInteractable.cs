@@ -9,8 +9,6 @@ public class DoorInteractable : Interactable, IDoor
     [SerializeField]
     private TextMeshProUGUI doorText;
     [SerializeField]
-    private GameObject door;
-    [SerializeField]
     private Vector3 teleportLocation;
     [SerializeField]
     private Vector3 exitLocation;

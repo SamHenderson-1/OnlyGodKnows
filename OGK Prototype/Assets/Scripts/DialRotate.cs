@@ -20,7 +20,7 @@ public class DialRotate : MonoBehaviour
         wheel = transform;
     }
 
-    private void OnMouseDown()
+    private void OnMouseDown()//Interact
     {
         if (coroutineAllowed) 
         {
@@ -32,7 +32,7 @@ public class DialRotate : MonoBehaviour
     { 
         coroutineAllowed = false;
 
-        for (int i = 0; i <= 11; i++) 
+        for (int i = 0; i <= 10; i++) 
         {
             wheel.Rotate(0f, 0f, -3f);
             yield return new WaitForSeconds(0.01f);

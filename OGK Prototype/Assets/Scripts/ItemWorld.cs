@@ -4,16 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemWorld : Interactable
-{
-    public static ItemWorld SpawnItemWorld(Vector3 position, Item item) 
-    {
-        Transform transform = Instantiate(ItemAssets.Instance.pfItemWorld, position, Quaternion.identity);
-        ItemWorld itemWorld = transform.GetComponent<ItemWorld>();
-        itemWorld.SetItem(item);
-
-        return itemWorld;
-    }
-
+{ 
     private Item item;
     private MeshRenderer meshRenderer;
     FirstPersonController playerController;
@@ -34,14 +25,11 @@ public class ItemWorld : Interactable
         meshRenderer.material = item.GetMaterial();
     }
 
-    //protected override void Interact()
-    //{
-    //    if (itemWorld != null)
-    //    {
-    //        playerController.inventory.AddItem(itemWorld.GetItem());
-    //        itemWorld.DestroySelf();
-    //    }
-    //}
+    protected override void Interact()
+    {
+            playerController.inventory.AddItem(this.GetItem());
+            this.DestroySelf();
+    }
 
     public Item GetItem() { 
         return item;

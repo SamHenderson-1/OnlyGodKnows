@@ -5,10 +5,19 @@ using UnityEngine;
 public class ItemWorldSpawner : MonoBehaviour
 {
     public Item item;
-
-    private void Awake()
+    public static ItemWorld SpawnItemWorld(Vector3 position, Item item)
     {
-        ItemWorld.SpawnItemWorld(transform.position, item);
+        Transform transform = Instantiate(ItemAssets.Instance.pfItemWorld, position, Quaternion.identity);
+        ItemWorld itemWorld = transform.GetComponent<ItemWorld>();
+        itemWorld.SetItem(item);
+        itemWorld.promptMessage = "Pick Up " + item.itemType.ToString();
+
+        return itemWorld;
+    }
+
+    void Start()
+    {
+        SpawnItemWorld(transform.position, item);
         Destroy(gameObject);
     }
 }

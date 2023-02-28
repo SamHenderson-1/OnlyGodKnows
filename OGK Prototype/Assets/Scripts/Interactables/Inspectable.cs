@@ -3,22 +3,19 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Inspectable : MonoBehaviour
+public class Inspectable : Interactable
 {
     [SerializeField]
     private TextMeshProUGUI inspectionText;
     [SerializeField]
-    private GameObject subject;
+    private Vector3 cameraPosition;
+    [SerializeField]
+    private Quaternion cameraRotation;
 
-    // Start is called before the first frame update
-    void Start()
+    protected override void Interact()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Collider objectCollider = GetComponent<Collider>();
+        Item3DViewer inspectedObject = FindObjectOfType<Item3DViewer>();
+        inspectedObject.OnItemSelected(cameraPosition, cameraRotation, objectCollider);
     }
 }
