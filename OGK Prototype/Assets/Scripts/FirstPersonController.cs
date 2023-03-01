@@ -240,35 +240,26 @@ namespace StarterAssets
 			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 		}
 
-		private void Interact() {
-            IInteractable interactable = GetInteractableObject();
-            if (interactable != null)
-                interactable.Interact(transform);
-        }
-
-        public IInteractable GetInteractableObject()
+        private void CheckForInteractions()
         {
-            List<IInteractable> interactableList = new List<IInteractable>();
-            Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
-            foreach (Collider collider in colliderArray)
+            playerUI.UpdateText(string.Empty);
+            Ray ray = new Ray(transform.position + new Vector3(0, 1, 0), _mainCamera.transform.forward);
+            Debug.DrawRay(ray.origin, ray.direction * interactionRange);
+            RaycastHit hitInfo;
+            if (Physics.Raycast(ray, out hitInfo, interactionRange, mask))
             {
-                if (collider.TryGetComponent(out IInteractable interactable))
-                    interactableList.Add(interactable);
-            }
-
-            IInteractable closestInteractable = null;
-            foreach (IInteractable interactable in interactableList)
-            {
-                if (closestInteractable == null)
-                    closestInteractable = interactable;
-                else
+                if (hitInfo.collider.GetComponent<Interactable>() != null)
                 {
-                    if (Vector3.Distance(transform.position, interactable.GetTransform().position) <
-                        Vector3.Distance(transform.position, closestInteractable.GetTransform().position))
-                        closestInteractable = interactable;
+                    Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
+                    playerUI.UpdateText(interactable.promptMessage);
+                    if (Keyboard.current.eKey.wasPressedThisFrame)
+                    {
+                        Debug.Log("Interacted");
+                        interactable.BaseInteract();
+                        playerUI.UpdateText("");
+                    }
                 }
             }
-            return closestInteractable;
         }
 
         private void JumpAndGravity()
