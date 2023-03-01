@@ -33,26 +33,26 @@ public class Item3DViewer : MonoBehaviour {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        while (!Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-            Ray ray = Camera.main.ScreenToWorldPoint(player.transform.position + new Vector3(0, 1, 0), worldPos);
-            Debug.DrawRay(ray.origin, ray.direction * 100);
-            RaycastHit hitInfo;
-            if (Physics.Raycast(ray, out hitInfo, 100, player.mask))
-            {
-                if (hitInfo.collider.GetComponent<Interactable>() != null)
-                {
-                    Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
-                    player.playerUI.UpdateText(interactable.promptMessage);
-                    if (Mouse.current.leftButton.wasPressedThisFrame)
-                    {
-                        Debug.Log("Interacted");
-                        interactable.BaseInteract();
-                        player.playerUI.UpdateText("");
-                    }
-                }
-            }
-        }
+        //while (!Keyboard.current.escapeKey.wasPressedThisFrame)
+        //{
+        //    Ray ray = Camera.main.ScreenToWorldPoint(player.transform.position + new Vector3(0, 1, 0), worldPos);
+        //    Debug.DrawRay(ray.origin, ray.direction * 100);
+        //    RaycastHit hitInfo;
+        //    if (Physics.Raycast(ray, out hitInfo, 100, player.mask))
+        //    {
+        //        if (hitInfo.collider.GetComponent<Interactable>() != null)
+        //        {
+        //            Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
+        //            player.playerUI.UpdateText(interactable.promptMessage);
+        //            if (Mouse.current.leftButton.wasPressedThisFrame)
+        //            {
+        //                Debug.Log("Interacted");
+        //                interactable.BaseInteract();
+        //                player.playerUI.UpdateText("");
+        //            }
+        //        }
+        //    }
+        //}
         player.transform.SetPositionAndRotation(savedPosition, rotation);
         player.disabled = false;
         collider.enabled = true;

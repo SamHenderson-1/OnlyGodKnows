@@ -15,10 +15,10 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public partial class @StarterAssetsClass : IInputActionCollection2, IDisposable
+public partial class @StarterAssets : IInputActionCollection2, IDisposable
 {
     public InputActionAsset asset { get; }
-    public @StarterAssetsClass()
+    public @StarterAssets()
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""StarterAssets"",
@@ -981,8 +981,8 @@ public partial class @StarterAssetsClass : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_InventoryJournal;
     public struct PlayerActions
     {
-        private @StarterAssetsClass m_Wrapper;
-        public PlayerActions(@StarterAssetsClass wrapper) { m_Wrapper = wrapper; }
+        private @StarterAssets m_Wrapper;
+        public PlayerActions(@StarterAssets wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
@@ -1065,8 +1065,8 @@ public partial class @StarterAssetsClass : IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_TrackedDeviceOrientation;
     public struct UIActions
     {
-        private @StarterAssetsClass m_Wrapper;
-        public UIActions(@StarterAssetsClass wrapper) { m_Wrapper = wrapper; }
+        private @StarterAssets m_Wrapper;
+        public UIActions(@StarterAssets wrapper) { m_Wrapper = wrapper; }
         public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
         public InputAction @Submit => m_Wrapper.m_UI_Submit;
         public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
