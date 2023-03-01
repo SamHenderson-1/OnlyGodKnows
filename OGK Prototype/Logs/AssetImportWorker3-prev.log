@@ -15,7 +15,7 @@ C:/Users/Joe/OneDrive/Documents/OnlyGodKnows/OGK Prototype
 -logFile
 Logs/AssetImportWorker3.log
 -srvPort
-51630
+62878
 Successfully changed project path to: C:/Users/Joe/OneDrive/Documents/OnlyGodKnows/OGK Prototype
 C:/Users/Joe/OneDrive/Documents/OnlyGodKnows/OGK Prototype
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,11 +47,11 @@ C:/Users/Joe/OneDrive/Documents/OnlyGodKnows/OGK Prototype
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [12428] Host "[IP] 192.168.0.141 [Port] 0 [Flags] 2 [Guid] 2355388272 [EditorId] 2355388272 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-REOJTS5) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [1296] Host "[IP] 192.168.0.141 [Port] 0 [Flags] 2 [Guid] 791118811 [EditorId] 791118811 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-REOJTS5) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [12428] Host "[IP] 192.168.0.141 [Port] 0 [Flags] 2 [Guid] 2355388272 [EditorId] 2355388272 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-REOJTS5) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [1296] Host "[IP] 192.168.0.141 [Port] 0 [Flags] 2 [Guid] 791118811 [EditorId] 791118811 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-REOJTS5) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
-Refreshing native plugins compatible for Editor in 159.92 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 287.68 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.3.17f1 (3e8111cac19d)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.17f1/Editor/Data/Resources/UnitySubsystems
@@ -62,47 +62,47 @@ Direct3D:
     Renderer: Radeon RX 580 Series (ID=0x67df)
     Vendor:   ATI
     VRAM:     4074 MB
-    Driver:   31.0.12027.7000
+    Driver:   31.0.12044.3
 Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.17f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.17f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.17f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56772
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56228
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.17f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.051073 seconds.
+Registered in 0.018455 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 158.22 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 156.65 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.902 seconds
+- Completed reload, in  1.028 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1903ms)
-		BeginReloadAssembly (959ms)
+	ReloadAssembly (1028ms)
+		BeginReloadAssembly (111ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (739ms)
-			LoadAssemblies (954ms)
+		EndReloadAssembly (649ms)
+			LoadAssemblies (106ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (194ms)
+			SetupTypeCache (141ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (32ms)
-			SetupLoadedEditorAssemblies (439ms)
+			RebuildScriptCaches (33ms)
+			SetupLoadedEditorAssemblies (400ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (12ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (158ms)
+				RefreshPlugins (157ms)
 				BeforeProcessingInitializeOnLoad (2ms)
-				ProcessInitializeOnLoadAttributes (178ms)
-				ProcessInitializeOnLoadMethodAttributes (88ms)
+				ProcessInitializeOnLoadAttributes (172ms)
+				ProcessInitializeOnLoadMethodAttributes (58ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.016844 seconds.
+Registered in 0.016855 seconds.
