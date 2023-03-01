@@ -3,35 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemWorld : MonoBehaviour
-{
-    public static ItemWorld SpawnItemWorld(Vector3 position, Item item) 
-    {
-        Debug.Log(ItemAssets.Instance.pfItemWorld);
-        Debug.Log(position);
-        Debug.Log(Quaternion.identity);
-
-        Transform transform = Instantiate(ItemAssets.Instance.pfItemWorld, position, Quaternion.identity);
-        ItemWorld itemWorld = transform.GetComponent<ItemWorld>();
-        itemWorld.SetItem(item);
-
-        return itemWorld;
-        
-    }
-
+public class ItemWorld : Interactable
+{ 
     private Item item;
     private MeshRenderer meshRenderer;
+    FirstPersonController playerController;
 
     private void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
     }
 
-    public void SetItem(Item item) 
-    { 
+    private void Start()
+    {
+        playerController = GameObject.FindWithTag("Player").transform.GetComponent<FirstPersonController>();
+    }
+
+    public void SetItem(Item item)
+    {
         this.item = item;
         meshRenderer.material = item.GetMaterial();
+    }
 
+    protected override void Interact()
+    {
+            playerController.inventory.AddItem(this.GetItem());
+            this.DestroySelf();
     }
 
     public Item GetItem() { 
