@@ -23,6 +23,7 @@ public class UI_Inventory : MonoBehaviour
 
     private void RefreshInventoryItems() 
     {
+        Debug.Log("Inventory Refresh");
         int x = 0;
         int y = 0;
         float itemSlotCollSize = 75f;
@@ -36,11 +37,11 @@ public class UI_Inventory : MonoBehaviour
             Image image = itemSlotRectTransform.Find("itemImage").GetComponent<Image>();
             image.sprite = item.GetSprite();
             x++;
-        }
-        if (x > 4)
-        {
-            x = 0;
-            y++;
+            if (x > 4)
+            {
+                x = 0;
+                y++;
+            }
         }
     }
 }
