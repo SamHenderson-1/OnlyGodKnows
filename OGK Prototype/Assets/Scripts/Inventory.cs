@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory
 {
+    public event EventHandler onItemListChanged;
+
     private List<Item> itemList;
 
     public Inventory() 
