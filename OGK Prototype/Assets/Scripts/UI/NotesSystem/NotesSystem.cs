@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace NotesSystem
@@ -58,12 +59,11 @@ namespace NotesSystem
         [Header("Colors")]
         [SerializeField] Color color1 = Color.grey;
         [SerializeField] Color color2 = Color.gray;
+        [SerializeField] FirstPersonController player;
 
         private static Dictionary<string, Note> Notes = new Dictionary<string, Note>();
         private List<NoteData> noteDatas = new List<NoteData>();
         private static Action<Note> A_Display = delegate { };
-        private FirstPersonController player;
-
         #endregion
 
         #region Audio
@@ -116,12 +116,11 @@ namespace NotesSystem
 
             defaultPageTexture = UI.Page.sprite;
             Display(activeNote);
-            player = GameObject.FindWithTag("Player").transform.GetComponent<FirstPersonController>();
         }
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Tab))
+            if (Keyboard.current.tabKey.wasPressedThisFrame)
             {
                 usingNotesSystem = !usingNotesSystem;
                 switch (usingNotesSystem)

@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Console
+  m_Title: Game
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -704,14 +704,14 @@ MonoBehaviour:
   m_OverrideSceneCullingMask: 6917529027641081856
   m_SceneIsLit: 1
   m_SceneLighting: 1
-  m_2DMode: 0
+  m_2DMode: 1
   m_isRotationLocked: 0
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1.5420736, y: 2.1762767, z: 0.54070306}
+    m_Target: {x: 38.74362, y: 480.52014, z: 0.15396509}
     speed: 2
-    m_Value: {x: 1.5420736, y: 2.1762767, z: 0.54070306}
+    m_Value: {x: 38.74362, y: 480.52014, z: 0.15396509}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -758,17 +758,17 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.21309818, y: -0.11634313, z: 0.025565015, w: -0.96973866}
+    m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
-    m_Value: {x: -0.21309891, y: -0.11634353, z: 0.025565103, w: -0.96974194}
+    m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 1.3698357
+    m_Target: 166.55972
     speed: 2
-    m_Value: 1.3698357
+    m_Value: 166.55972
   m_Ortho:
-    m_Target: 0
+    m_Target: 1
     speed: 2
-    m_Value: 0
+    m_Value: 1
   m_CameraSettings:
     m_Speed: 0.34829998
     m_SpeedNormalized: 0.16999999
@@ -782,7 +782,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+  m_LastSceneViewRotation: {x: -0.306388, y: 0.14686039, z: -0.04790459, w: -0.9392862}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -831,22 +831,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Notes
+    - Assets/Scripts
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Notes
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Sam Henderson\Desktop\Projects\OnlyGodKnows\OGK Prototype
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: aa8d0000
-    m_LastClickedID: 36266
-    m_ExpandedIDs: 0000000088770000de770000e27700001a780000aa8d000000ca9a3bffffff7f
+    m_SelectedIDs: 888e0000
+    m_LastClickedID: 36488
+    m_ExpandedIDs: 00000000ea770000888e000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -874,7 +874,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000088770000
+    m_ExpandedIDs: 00000000ea770000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -899,8 +899,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: b6daffff
-    m_LastClickedInstanceID: -9546
+    m_SelectedInstanceIDs: 906e0000
+    m_LastClickedInstanceID: 28304
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000d86c0000d66c0000da6c00000000000018890000f2880000
     m_RenameOverlay:
@@ -1003,26 +1003,26 @@ MonoBehaviour:
     m_SaveData: []
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 105}
-      m_SelectedIDs: b6daffff
-      m_LastClickedID: -9546
-      m_ExpandedIDs: b6daffff4cfaffff50faffff14fbffff386e0000546e0000746e00007c6e00009a6e0000be6e0000206f00002c6f0000706f00008a6f0000a46f0000b86f0000ce6f0000
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 62b4ffff
+      m_LastClickedID: -19358
+      m_ExpandedIDs: 14fbffff8c6e0000a86e0000026f0000346f0000746f0000c06f000004700000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: NotesSystem
+        m_OriginalName: NotesSystem
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 28468
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 0}
+        m_ClientGUIView: {fileID: 4}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0

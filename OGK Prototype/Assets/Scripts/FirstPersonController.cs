@@ -31,8 +31,8 @@ namespace StarterAssets
         public LayerMask mask;
         [Tooltip("UI settings for the player")]
         public PlayerUI playerUI; 
-		[Tooltip("UI settings for the inventory and journal")]
-        public GameObject menuIJ;
+		[Tooltip("UI settings for the inventory")]
+        public GameObject menuI;
 
 
         [Space(10)]
@@ -135,7 +135,7 @@ namespace StarterAssets
             inventory = new Inventory();
             uiInventory.SetInventory(inventory);
 
-			menuIJ.SetActive(uiActive);
+			menuI.SetActive(uiActive);
         }
 
         private void Update()
@@ -146,16 +146,16 @@ namespace StarterAssets
 				GroundedCheck();
 				Move();
 				CheckForInteractions();
-				CheckForInventoryJournal();
+				CheckForInventory();
 			} 
 		}
 
-        private void CheckForInventoryJournal()
+        private void CheckForInventory()
         {
             if(Keyboard.current.iKey.wasPressedThisFrame)
 			{
 				uiActive = !uiActive;
-				menuIJ.SetActive(uiActive);
+				menuI.SetActive(uiActive);
 			}
         }
 

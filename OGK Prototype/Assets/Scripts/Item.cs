@@ -40,4 +40,16 @@ public class Item
 
         }
     }
+
+    public bool IsStackable() { 
+        switch (itemType)
+        {
+            default: 
+            case ItemType.Medicine:
+            case ItemType.Ammo:
+                return true;
+            case ItemType.Key: 
+                return false;
+        }
+    }
 }
