@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
+using NoteSystem;
 #endif
 
 namespace StarterAssets
@@ -33,7 +34,8 @@ namespace StarterAssets
         public PlayerUI playerUI; 
 		[Tooltip("UI settings for the inventory")]
         public GameObject menuI;
-
+        [Tooltip("UI settings for the inventory")]
+        public NoteSystem.NotesSystem menuJ;
 
         [Space(10)]
         [Tooltip("Determines whether or not the player can jump")]
@@ -83,9 +85,10 @@ namespace StarterAssets
 		public bool disabled;
 
 		private bool uiActive = false;
-	
+        private bool usingNotesSystem = false;
+
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
-		private PlayerInput _playerInput;
+        private PlayerInput _playerInput;
 #endif
 		private CharacterController _controller;
 		private StarterAssetsInputs _input;
@@ -146,18 +149,18 @@ namespace StarterAssets
 				GroundedCheck();
 				Move();
 				CheckForInteractions();
-				CheckForInventory();
+				CheckForInventoryAndJournal();
 			} 
 		}
 
-        private void CheckForInventory()
+        private void CheckForInventoryAndJournal()
         {
             if(Keyboard.current.iKey.wasPressedThisFrame)
 			{
 				uiActive = !uiActive;
 				menuI.SetActive(uiActive);
 			}
-        }
+		}
 
         private void LateUpdate()
 		{

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NotesSystem
+namespace NoteSystem
 {
     public enum PageType { Text, Texture }
 

@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 
-namespace NotesSystem
+namespace NoteSystem
 {
     public class NotePickup : Interactable
     {

@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace NotesSystem
+namespace NoteSystem
 {
     [CreateAssetMenu(fileName = "new Note", menuName = "Notes System/new Note")]
     public class Note : ScriptableObject

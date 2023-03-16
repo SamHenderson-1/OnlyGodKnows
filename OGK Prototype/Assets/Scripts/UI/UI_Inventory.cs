@@ -10,8 +10,6 @@ public class UI_Inventory : MonoBehaviour
     private Inventory inventory;
     private Transform itemSlotContainer;
     private Transform itemSlotTemplate;
-    [SerializeField]
-    TextMeshProUGUI uiText;
 
     private void Awake()
     {
@@ -54,7 +52,8 @@ public class UI_Inventory : MonoBehaviour
             Image image = itemSlotRectTransform.Find("itemImage").GetComponent<Image>();
             image.sprite = item.GetSprite();
 
-            if(item.amount > 1) 
+            TextMeshProUGUI uiText = itemSlotRectTransform.Find("text").GetComponent<TextMeshProUGUI>();
+            if (item.amount > 1) 
                 uiText.SetText(item.amount.ToString());
             else
                 uiText.SetText("");

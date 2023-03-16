@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace NotesSystem
+namespace NoteSystem
 {
     [Serializable()]
     public struct UIElements
@@ -81,7 +81,7 @@ namespace NotesSystem
 
         #region Properties and Private
 
-        private Note activeNote = null;
+        public Note activeNote = null;
         private Page ActivePage
         {
             get
@@ -122,6 +122,7 @@ namespace NotesSystem
         {
             if (Keyboard.current.tabKey.wasPressedThisFrame)
             {
+                Debug.Log("Tab");
                 usingNotesSystem = !usingNotesSystem;
                 switch (usingNotesSystem)
                 {
@@ -144,7 +145,6 @@ namespace NotesSystem
             player.disabled = true;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-
             UpdateList();
             UpdateCanvasGroup(true, UI.ListCanvasGroup);
         }
@@ -353,7 +353,7 @@ namespace NotesSystem
             activeNote = null;
             currentPage = 0;
             readSubscript = false;
-            sources[1].Stop();
+            //sources[1].Stop();
         }
         private void ClearList()
         {
