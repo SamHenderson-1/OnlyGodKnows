@@ -17,14 +17,13 @@ public class UIManager : MonoBehaviour
     public GameObject menuP;
     public static bool isPaused;
     private bool iActive = false;
-    private bool pActive = false;
     private bool usingNotesSystem = false;
 
     // Start is called before the first frame update
     void Start()
     {
         menuI.SetActive(iActive);
-        menuP.SetActive(pActive);
+        menuP.SetActive(false);
     }
 
     // Update is called once per frame
@@ -82,7 +81,7 @@ public class UIManager : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
-        else if (!pActive && !iActive && !usingNotesSystem) 
+        else if (!isPaused && !iActive && !usingNotesSystem) 
         {
             player.disabled = false;
             Cursor.visible = false;
@@ -92,17 +91,27 @@ public class UIManager : MonoBehaviour
 
     public void PauseGame() 
     { 
-        pActive = true;
-        menuP.SetActive(pActive);
+        menuP.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
     }
 
     public void ResumeGame()
     {
-        pActive = false;
-        menuP.SetActive(pActive);
+        menuP.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
+        ActivateCursor();
+    }
+
+    public void GoToMainMenu() 
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void QuitGame() 
+    {
+        Application.Quit();
     }
 }
