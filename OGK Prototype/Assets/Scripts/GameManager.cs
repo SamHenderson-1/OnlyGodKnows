@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public void EndGame() {
         if (!gameHasEnded) { 
             gameHasEnded = true;
-            Debug.Log("Game Over");
+            SceneManager.LoadScene(3);
         }
     }
 }
