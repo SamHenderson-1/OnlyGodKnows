@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
 public class ItemWorldSpawner : MonoBehaviour
 {
@@ -19,5 +20,12 @@ public class ItemWorldSpawner : MonoBehaviour
     {
         SpawnItemWorld(transform.position, item);
         Destroy(gameObject);
+    }
+    public static ItemWorld DropItem(Vector3 dropPosition, Item item)
+    {
+        Vector3 randomDir = UtilsClass.GetRandomDir();
+        ItemWorld itemworld = SpawnItemWorld(dropPosition + randomDir * 5f, item);
+        itemworld.GetComponent<Rigidbody>().AddForce(randomDir * 5f, ForceMode.Impulse);
+        return itemworld;
     }
 }

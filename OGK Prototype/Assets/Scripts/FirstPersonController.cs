@@ -84,9 +84,6 @@ namespace StarterAssets
 
 		public bool disabled;
 
-		private bool uiActive = false;
-        private bool usingNotesSystem = false;
-
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         private PlayerInput _playerInput;
 #endif
@@ -136,9 +133,8 @@ namespace StarterAssets
 			_fallTimeoutDelta = FallTimeout;
 
             inventory = new Inventory();
+			uiInventory.SetPlayer(this);
             uiInventory.SetInventory(inventory);
-
-			menuI.SetActive(uiActive);
         }
 
         private void Update()
@@ -149,17 +145,7 @@ namespace StarterAssets
 				GroundedCheck();
 				Move();
 				CheckForInteractions();
-				CheckForInventoryAndJournal();
 			} 
-		}
-
-        private void CheckForInventoryAndJournal()
-        {
-            if(Keyboard.current.iKey.wasPressedThisFrame)
-			{
-				uiActive = !uiActive;
-				menuI.SetActive(uiActive);
-			}
 		}
 
         private void LateUpdate()
@@ -335,5 +321,10 @@ namespace StarterAssets
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
-	}
+
+        public Vector3 GetPosition()
+        {
+            return transform.position;
+        }
+    }
 }

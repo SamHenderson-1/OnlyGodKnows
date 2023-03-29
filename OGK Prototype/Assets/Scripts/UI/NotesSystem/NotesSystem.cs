@@ -118,42 +118,17 @@ namespace NoteSystem
             Display(activeNote);
         }
 
-        private void Update()
-        {
-            if (Keyboard.current.tabKey.wasPressedThisFrame)
-            {
-                Debug.Log("Tab");
-                usingNotesSystem = !usingNotesSystem;
-                switch (usingNotesSystem)
-                {
-                    case true:
-                        Open();
-                        break;
-                    case false:
-                        Close((activeNote != null) ? true : false);
-                        break;
-                }
-            }
-        }
-
         #endregion
 
         #region Display and Hide Methods
 
         public void Open()
         {
-            player.disabled = true;
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
             UpdateList();
             UpdateCanvasGroup(true, UI.ListCanvasGroup);
         }
         public void Close(bool playSFX)
         {
-            player.disabled = false;
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-
             CloseNote(playSFX);
             UpdateCanvasGroup(false, UI.ListCanvasGroup);
         }

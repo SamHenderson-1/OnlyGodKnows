@@ -52,15 +52,18 @@ public class EnemyBasicAI : MonoBehaviour
 
     private void Update()
     {
-        EnviromentView();                       //  Check whether or not the player is in the enemy's field of vision
 
-        if (!m_IsPatrol)
-        {
-            Chasing();
-        }
-        else
-        {
-            Patroling();
+        if (!UIManager.isPaused) {
+            EnviromentView();                       //  Check whether or not the player is in the enemy's field of vision
+
+            if (!m_IsPatrol)
+            {
+                Chasing();
+            }
+            else
+            {
+                Patroling();
+            }
         }
     }
 
