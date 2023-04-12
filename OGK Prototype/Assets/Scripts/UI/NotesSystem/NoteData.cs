@@ -40,7 +40,8 @@ namespace NoteSystem
         }
         public void Display()
         {
-            NotesSystem.Display(note);
+            FindObjectOfType<NotesSystem>().DisplayNote(note);
+            
         }
     }
 }
