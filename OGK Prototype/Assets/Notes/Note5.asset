@@ -9,18 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adf75c11eea57cf43ac8ca31cf4f6356, type: 3}
-  m_Name: Note1_p1
+  m_Script: {fileID: 11500000, guid: a4966dc5a3b9b0342ad1cb7ed5e46b9b, type: 3}
+  m_Name: Note5
   m_EditorClassIdentifier: 
-  type: 0
-  text: 'Test
-
-    Test
-
-    Test'
-  texture: {fileID: 0}
-  useSubscript: 0
-  displayLines: 1
-  narration: {fileID: 0}
-  narration_PlayOnce: 1
-  narrationPlayed: 0
+  label: Note 2
+  pages:
+  - {fileID: 11400000, guid: 46ee810add1f3e84ca91fccd1ef5e155, type: 2}
+  - {fileID: 11400000, guid: b43399a240c952148bd48cfacef39c05, type: 2}
