@@ -15,7 +15,7 @@ namespace NoteSystem
         {
             if (autoDisplay)
             {
-                NotesSystem.Display(note);
+                FindObjectOfType<NotesSystem>().DisplayNote(note);
             }
             if (add)
             {
