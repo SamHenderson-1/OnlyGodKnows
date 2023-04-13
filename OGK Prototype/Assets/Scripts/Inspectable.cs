@@ -8,14 +8,12 @@ public class Inspectable : Interactable
     [SerializeField]
     private TextMeshProUGUI inspectionText;
     [SerializeField]
-    private Vector3 cameraPosition;
-    [SerializeField]
-    private Quaternion cameraRotation;
+    private Transform cameraTransform;
 
     protected override void Interact()
     {
         Collider objectCollider = GetComponent<Collider>();
         Item3DViewer inspectedObject = FindObjectOfType<Item3DViewer>();
-        inspectedObject.OnItemSelected(cameraPosition, cameraRotation, objectCollider);
+        inspectedObject.OnItemSelected(cameraTransform.position, cameraTransform.rotation, objectCollider);
     }
 }

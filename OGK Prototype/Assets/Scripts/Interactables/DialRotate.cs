@@ -22,6 +22,7 @@ public class DialRotate : MonoBehaviour
 
     private void OnMouseDown()//Interact
     {
+        Debug.Log("sadasd");
         if (coroutineAllowed) 
         {
             StartCoroutine("RotateWheel");
@@ -48,5 +49,10 @@ public class DialRotate : MonoBehaviour
         }
 
         Rotated(name, numberShown);
+    }
+
+    public void RotateHelper()
+    {
+        StartCoroutine("RotateWheel");
     }
 }

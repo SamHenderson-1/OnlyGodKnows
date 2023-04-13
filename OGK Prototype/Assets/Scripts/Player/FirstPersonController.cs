@@ -68,7 +68,6 @@ namespace StarterAssets
 		public float TopClamp = 90.0f;
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
-
 		// cinemachine
 		private float _cinemachineTargetPitch;
 
@@ -77,9 +76,8 @@ namespace StarterAssets
 		private float _rotationVelocity;
 		private float _verticalVelocity;
 		private float _terminalVelocity = 53.0f;
-
-		// timeout deltatime
-		private float _jumpTimeoutDelta;
+        // timeout deltatime
+        private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
 
 		public bool disabled;
@@ -95,6 +93,8 @@ namespace StarterAssets
 
 		[SerializeField] private UI_Inventory uiInventory;		
 		public Inventory inventory;
+        public Item3DViewer inspectedObject;
+        public bool interacting;
 
         private bool IsCurrentDeviceMouse
 		{
@@ -142,10 +142,15 @@ namespace StarterAssets
 			if (!disabled)
 			{
 				JumpAndGravity();
-				GroundedCheck();
 				Move();
+				GroundedCheck();
 				CheckForInteractions();
-			} 
+			}
+			if (disabled && interacting && (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.aKey.wasPressedThisFrame
+          || Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.dKey.wasPressedThisFrame))
+                reactivate();
+			if (disabled && interacting)
+				MouseRaycast();
 		}
 
         private void LateUpdate()
@@ -183,6 +188,42 @@ namespace StarterAssets
 			}
 		}
 
+		private void reactivate() {
+            if (interacting)
+            {
+                interacting = false;
+                inspectedObject.GetComponent<Collider>().enabled = true;
+                disabled = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+        }
+		private void MouseRaycast() 
+		{
+			Vector3 mousePos;
+
+			if (Mouse.current.leftButton.wasPressedThisFrame)
+			{
+                mousePos = Mouse.current.position.ReadValue();
+
+                Ray ray = Camera.main.ScreenPointToRay(mousePos);
+                print("hello");
+
+                Debug.DrawRay(ray.origin, ray.direction * interactionRange);
+                RaycastHit hitInfo;
+                if (Physics.Raycast(ray, out hitInfo, interactionRange, mask))
+                {
+                    if (hitInfo.collider.GetComponent<DialRotate>() != null)
+                    {
+                        DialRotate dialRotate = hitInfo.collider.GetComponent<DialRotate>();
+                        dialRotate.RotateHelper();
+                        print("hit");
+                    }
+                }
+            }
+
+
+        }
 		private void Move()
 		{
 			// set target speed based on move speed, sprint speed and if sprint is pressed
@@ -228,6 +269,7 @@ namespace StarterAssets
 
 			// move the player
 			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+
 		}
 
         private void CheckForInteractions()
