@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -17,7 +18,7 @@ public class LockControl : MonoBehaviour
     }
 
     private void CheckResults(string wheelName, int number) 
-    { 
+    {
         switch (wheelName) 
         {
             case "wheel1":
@@ -29,7 +30,9 @@ public class LockControl : MonoBehaviour
             case "wheel3":
                 result[2] = number; break;
         }
-        if (result[0] == correctCombination[0] && result[1] == correctCombination[1] && result[2] == correctCombination[2]) 
+        for(int i = 0; i < result.Length; i++)
+            Debug.Log(result[i]);
+        if (Enumerable.SequenceEqual(result, correctCombination)) 
         {
             Debug.Log("Opened!");
         }

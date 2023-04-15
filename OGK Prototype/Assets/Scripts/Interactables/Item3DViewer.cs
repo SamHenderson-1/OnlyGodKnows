@@ -14,7 +14,6 @@ public class Item3DViewer : MonoBehaviour {
     private Transform itemPrefab;
     private Vector3 savedPosition;
     private Vector3 worldPos;
-    private GameObject camera;
 
     void Start()
     {
@@ -22,12 +21,10 @@ public class Item3DViewer : MonoBehaviour {
         Vector3 mousePos = Mouse.current.position.ReadValue();
         mousePos.z = Camera.main.nearClipPlane;
         worldPos = Camera.main.ScreenToWorldPoint(mousePos);
-        camera = GameObject.FindWithTag("MainCamera");
     }
 
     public void OnItemSelected(Vector3 position, Quaternion rotation, Collider collider)
     {
-        Debug.Log("Selected");
         player.disabled = true;
         player.transform.position = position;
         player.transform.rotation = rotation;

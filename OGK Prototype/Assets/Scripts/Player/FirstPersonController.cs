@@ -189,25 +189,21 @@ namespace StarterAssets
 		}
 
 		private void reactivate() {
-            if (interacting)
-            {
-                interacting = false;
-                inspectedObject.GetComponent<Collider>().enabled = true;
-                disabled = false;
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
+			interacting = false;
+			inspectedObject.GetComponent<Collider>().enabled = true;
+			disabled = false;
+			Cursor.lockState = CursorLockMode.Locked;
+			Cursor.visible = false;
         }
 		private void MouseRaycast() 
 		{
 			Vector3 mousePos;
 
-			if (Mouse.current.leftButton.wasPressedThisFrame)
+			if (Mouse.current.leftButton.wasPressedThisFrame || Mouse.current.rightButton.wasPressedThisFrame)
 			{
                 mousePos = Mouse.current.position.ReadValue();
 
                 Ray ray = Camera.main.ScreenPointToRay(mousePos);
-                print("hello");
 
                 Debug.DrawRay(ray.origin, ray.direction * interactionRange);
                 RaycastHit hitInfo;
@@ -217,7 +213,6 @@ namespace StarterAssets
                     {
                         DialRotate dialRotate = hitInfo.collider.GetComponent<DialRotate>();
                         dialRotate.RotateHelper();
-                        print("hit");
                     }
                 }
             }
