@@ -14,6 +14,10 @@ public class DoorInteractable : Interactable, IDoor
     private Vector3 exitLocation;
     private bool doorOpen;
     private bool entered = false;
+    [SerializeField]
+    private bool locked;
+    [SerializeField]
+    private DialRotate doorLock;
 
     FirstPersonController playerController;
 
@@ -24,12 +28,14 @@ public class DoorInteractable : Interactable, IDoor
 
     protected override void Interact()
     {
-        ToggleDoor();
+        //if (locked)
+        //    doorText = TMPro.TextMeshProUGUI.Equals("The door is locked.");
+        //else
+            ToggleDoor();
     }
 
     public void ToggleDoor()
     {
-        Debug.Log("Door Open");
         doorOpen = !doorOpen;
         StartCoroutine("Teleport");
     }
