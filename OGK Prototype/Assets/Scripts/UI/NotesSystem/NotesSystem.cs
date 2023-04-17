@@ -133,7 +133,7 @@ namespace NoteSystem
             UpdateCanvasGroup(false, UI.ListCanvasGroup);
         }
 
-        private void DisplayNote(Note note)
+        public void DisplayNote(Note note)
         {
             if (note == null) { return; }
 
@@ -148,23 +148,24 @@ namespace NoteSystem
         {
             UI.ReadButton.interactable = activeNote.Pages[page].Type == PageType.Texture;
 
-            sources[1].Stop();
-            if (activeNote.Pages[page].Narration != null)
-            {
-                if (!activeNote.Pages[page].NarrationPlayed)
-                {
-                    sources[1].clip = activeNote.Pages[page].Narration;
-                    sources[1].Play();
-                    if (activeNote.Pages[page].Narration_PlayOnce)
-                    {
-                        activeNote.Pages[page].NarrationPlayed = true;
-                    }
-                }
-            }
+            //sources[1].Stop();
+            //if (activeNote.Pages[page].Narration != null)
+            //{
+            //    if (!activeNote.Pages[page].NarrationPlayed)
+            //    {
+            //        sources[1].clip = activeNote.Pages[page].Narration;
+            //        sources[1].Play();
+            //        if (activeNote.Pages[page].Narration_PlayOnce)
+            //        {
+            //            activeNote.Pages[page].NarrationPlayed = true;
+            //        }
+            //    }
+            //}
 
             switch (activeNote.Pages[page].Type)
             {
                 case PageType.Text:
+                    print(activeNote.Pages[page].Text);
                     UI.Page.sprite = defaultPageTexture;
                     UI.TextObj.text = activeNote.Pages[page].Text;
                     break;
@@ -176,9 +177,9 @@ namespace NoteSystem
             UpdateUI();
         }
 
-        public static void Display(Note note)
+        public void Display(Note note)
         {
-            A_Display(note);
+            DisplayNote(note);
         }
         public static void Display(string key)
         {
