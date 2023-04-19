@@ -27,15 +27,17 @@ public class DoorInteractable : Interactable, IDoor
     void Start() 
     { 
         playerController = GameObject.FindWithTag("Player").transform.GetComponent<FirstPersonController>();
-        lockControl.lockState = true;
-        Debug.Log(lockControl.lockState);
-        doorText = promptMessage;
+        if (lockControl != null)
+        {
+            lockControl.lockState = true;
+            Debug.Log(lockControl.lockState);
+            doorText = promptMessage;
+        }
     }
 
     protected override void Interact()
     {
-        Debug.Log(lockControl.lockState);
-        if (lockControl.lockState == true)
+        if (lockControl != null && lockControl.lockState == true)
             promptMessage = lockText;
         else
         {
