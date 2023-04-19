@@ -9,6 +9,7 @@ public class LockControl : MonoBehaviour
     private int[] result;
     [SerializeField]
     private int[] correctCombination;
+    public bool lockState;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,7 @@ public class LockControl : MonoBehaviour
         if (Enumerable.SequenceEqual(result, correctCombination)) 
         {
             Debug.Log("Opened!");
+            lockState = false;
         }
     }
 

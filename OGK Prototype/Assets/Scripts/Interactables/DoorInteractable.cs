@@ -6,32 +6,42 @@ using UnityEngine;
 
 public class DoorInteractable : Interactable, IDoor
 {
+    private string doorText;
     [SerializeField]
-    private TextMeshProUGUI doorText;
+    private string lockText;
     [SerializeField]
     private Vector3 teleportLocation;
     [SerializeField]
     private Vector3 exitLocation;
+    [SerializeField]
+    private Quaternion teleportRotation;
+    [SerializeField]
+    private Quaternion exitRotation;
     private bool doorOpen;
     private bool entered = false;
     [SerializeField]
-    private bool locked;
-    [SerializeField]
-    private DialRotate doorLock;
+    public LockControl lockControl;
 
     FirstPersonController playerController;
 
     void Start() 
     { 
         playerController = GameObject.FindWithTag("Player").transform.GetComponent<FirstPersonController>();
+        lockControl.lockState = true;
+        Debug.Log(lockControl.lockState);
+        doorText = promptMessage;
     }
 
     protected override void Interact()
     {
-        //if (locked)
-        //    doorText = TMPro.TextMeshProUGUI.Equals("The door is locked.");
-        //else
+        Debug.Log(lockControl.lockState);
+        if (lockControl.lockState == true)
+            promptMessage = lockText;
+        else
+        {
+            promptMessage = doorText;
             ToggleDoor();
+        }
     }
 
     public void ToggleDoor()
@@ -43,11 +53,18 @@ public class DoorInteractable : Interactable, IDoor
     public IEnumerator Teleport()
     {
         playerController.disabled = true;
-        yield return new WaitForSeconds(0.5f); 
-        if(!entered)
+        yield return new WaitForSeconds(0.5f);
+        if (!entered)
+        {
             playerController.gameObject.transform.position = teleportLocation;
+            playerController.gameObject.transform.rotation = teleportRotation;
+
+        }
         else
+        {
             playerController.gameObject.transform.position = exitLocation;
+            playerController.gameObject.transform.rotation = exitRotation;
+        }
         yield return new WaitForSeconds(0.5f);
         playerController.disabled = false;
         entered = !entered;
