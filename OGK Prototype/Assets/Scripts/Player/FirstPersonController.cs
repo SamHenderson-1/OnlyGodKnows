@@ -24,6 +24,7 @@ namespace StarterAssets
 		public float RotationSpeed = 1.0f;
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
+		public List<AudioClip> footstepSounds = new List<AudioClip>();
 
         [Space(10)]
         [Tooltip("Range at which the player can interact with NPCs and objects")]
@@ -95,6 +96,7 @@ namespace StarterAssets
 		public Inventory inventory;
         public Item3DViewer inspectedObject;
         public bool interacting;
+		public AudioSource audioSource;
 
         private bool IsCurrentDeviceMouse
 		{
@@ -215,10 +217,10 @@ namespace StarterAssets
                         dialRotate.RotateHelper();
                     }
                 }
-            }
+			}
 
 
-        }
+		}
 		private void Move()
 		{
 			// set target speed based on move speed, sprint speed and if sprint is pressed
@@ -267,7 +269,19 @@ namespace StarterAssets
 
 		}
 
-        private void CheckForInteractions()
+		private void PlayFootstepAudio() 
+		{
+			if (!Grounded)
+				return;
+			int n = UnityEngine.Random.Range(1, footstepSounds.Count);
+			audioSource.clip = footstepSounds[n];
+			audioSource.PlayOneShot(audioSource.clip);
+			footstepSounds[n] = footstepSounds[0];
+			footstepSounds[0] = audioSource.clip;
+
+        }
+
+		private void CheckForInteractions()
         {
             playerUI.UpdateText(string.Empty);
             Ray ray = new Ray(transform.position + new Vector3(0, 1, 0), _mainCamera.transform.forward);
