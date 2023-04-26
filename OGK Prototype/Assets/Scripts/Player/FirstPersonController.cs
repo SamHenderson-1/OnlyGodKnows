@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEditor.Experimental.GraphView;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 using NoteSystem;
@@ -40,6 +39,8 @@ namespace StarterAssets
         public NoteSystem.NotesSystem menuJ;
 		[SerializeField]
 		public Note startingNote;
+        [SerializeField]
+        public Note startingNote2;
         [SerializeField]
         public string startingText;
 
@@ -150,6 +151,7 @@ namespace StarterAssets
             Debug.Log("Reset Text");
             startingNote.Pages[0].text = startingText;
 			NotesSystem.AddNote(startingNote.Label, startingNote);
+            NotesSystem.AddNote(startingNote2.Label, startingNote2);
         }
 
         private void Update()
@@ -297,7 +299,7 @@ namespace StarterAssets
 		private void CheckForInteractions()
         {
             playerUI.UpdateText(string.Empty);
-            Ray ray = new Ray(transform.position + new Vector3(0, 1, 0), _mainCamera.transform.forward);
+            Ray ray = new Ray(transform.position + new Vector3(0, 1.5f, 0), _mainCamera.transform.forward);
             Debug.DrawRay(ray.origin, ray.direction * interactionRange);
             RaycastHit hitInfo;
             if (Physics.Raycast(ray, out hitInfo, interactionRange, mask))

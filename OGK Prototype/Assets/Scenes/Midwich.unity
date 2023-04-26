@@ -8953,7 +8953,7 @@ PrefabInstance:
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.51
+      value: 3.6
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81,
         type: 3}
@@ -8963,7 +8963,7 @@ PrefabInstance:
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.54
+      value: 14.3
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81,
         type: 3}
@@ -9548,7 +9548,7 @@ MonoBehaviour:
   lockText: 
   teleportLocation: {x: 118.3, y: 0.753, z: -50.22}
   exitLocation: {x: 118.2, y: 0.24000001, z: -39.8}
-  teleportRotation: {x: 0, y: 0, z: 0, w: 0}
+  teleportRotation: {x: 0.0004357642, y: 0.9999999, z: -1.9047859e-11, w: -0.000000043711385}
   exitRotation: {x: 0, y: 0, z: 0, w: 0}
   lockControl: {fileID: 0}
 --- !u!65 &241020124
@@ -26692,6 +26692,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 231231424665180687, guid: 99265ad4d85d3cb4496408f873641273,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 231231424709559438, guid: 99265ad4d85d3cb4496408f873641273,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -28941,7 +28946,7 @@ PrefabInstance:
     - target: {fileID: 3062140064769478567, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.51
+      value: 3.6
       objectReference: {fileID: 0}
     - target: {fileID: 3062140064769478567, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
         type: 3}
@@ -28951,12 +28956,12 @@ PrefabInstance:
     - target: {fileID: 3062140064769478567, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.54
+      value: 14.3
       objectReference: {fileID: 0}
     - target: {fileID: 3062140064769478567, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.9549912
+      value: -0.98898757
       objectReference: {fileID: 0}
     - target: {fileID: 3062140064769478567, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
         type: 3}
@@ -28966,7 +28971,7 @@ PrefabInstance:
     - target: {fileID: 3062140064769478567, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.29663408
+      value: 0.14799882
       objectReference: {fileID: 0}
     - target: {fileID: 3062140064769478567, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
         type: 3}
@@ -28981,7 +28986,7 @@ PrefabInstance:
     - target: {fileID: 3062140064769478567, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 325.489
+      value: 342.978
       objectReference: {fileID: 0}
     - target: {fileID: 3062140064769478567, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
         type: 3}
@@ -29035,6 +29040,12 @@ PrefabInstance:
       value: 'Joan was last spotted at the Silver Shamrock Convenience store in town.
         Better head in and see what I can find.  '
       objectReference: {fileID: 0}
+    - target: {fileID: 6255731441135452499, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
+        type: 3}
+      propertyPath: startingNote2
+      value: 
+      objectReference: {fileID: 11400000, guid: 02a04b73dc2763e44bcd8b18edc91f3d,
+        type: 2}
     - target: {fileID: 8218483194608117904, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
         type: 3}
       propertyPath: movement
@@ -62011,12 +62022,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 903b78d326dd8f3469dc2fdfdc61a78b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptMessage: Talk to NPC
+  promptMessage: Talk to Cashier
   interactionNote: {fileID: 11400000, guid: ac126b8a085d2454e834dc3ffd281cc0, type: 2}
   interactionCounter: 0
   alarm: 0
   newNote: 0
-  noteText: "The cashier doesn\u2019t know much about what happened. Seemed off though. "
+  noteText: "The cashier(Frankie) doesn\u2019t know much about what happened. Seemed
+    off though. "
   currentPage: 0
   player: {fileID: 675930619}
   npcText: {fileID: 170675517}
@@ -70747,7 +70759,7 @@ PrefabInstance:
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.51
+      value: 3.6
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74,
         type: 3}
@@ -70757,12 +70769,12 @@ PrefabInstance:
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.54
+      value: 14.3
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.9549912
+      value: -0.98898757
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74,
         type: 3}
@@ -70772,7 +70784,7 @@ PrefabInstance:
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.29663408
+      value: 0.14799882
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74,
         type: 3}

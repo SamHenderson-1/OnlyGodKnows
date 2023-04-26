@@ -2,7 +2,6 @@ using NoteSystem;
 using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour
