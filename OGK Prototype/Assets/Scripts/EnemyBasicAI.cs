@@ -31,6 +31,7 @@ public class EnemyBasicAI : MonoBehaviour
     bool m_PlayerNear;                              //  If the player is near, state of hearing
     bool m_IsPatrol;                                //  If the enemy is patrol, state of patroling
     bool m_CaughtPlayer;                            //  if the enemy has caught the player
+    Animator animator;
 
     void Start()
     {
@@ -48,6 +49,7 @@ public class EnemyBasicAI : MonoBehaviour
         navMeshAgent.isStopped = false;
         navMeshAgent.speed = speedWalk;             //  Set the navemesh speed with the normal speed of the enemy
         navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);    //  Set the destination to the first waypoint
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -58,6 +60,7 @@ public class EnemyBasicAI : MonoBehaviour
 
             if (!m_IsPatrol)
             {
+                animator.SetBool("isRunning", true);
                 Chasing();
             }
             else
