@@ -5,12 +5,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using NoteSystem;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class SceneSwitch : Interactable
 {
     public int sceneToSwitchTo;
     [SerializeField] bool requiresNote;
     private string holdMessage;
+    [SerializeField] bool hasTransition;
+    [SerializeField]
+    VideoPlayer video;
+    [SerializeField]
+    RawImage cutscene;
 
     protected override void Interact()
     {
@@ -26,8 +33,24 @@ public class SceneSwitch : Interactable
         }
         else
         {
-            SceneManager.LoadScene(sceneToSwitchTo);
+            Debug.Log("Loading Ending scene");
+            if (hasTransition) 
+                Transition();
+            else
+                SceneManager.LoadScene(sceneToSwitchTo);
         }
+    }
+    private void Transition() {
+        promptMessage = "";
+        UIManager.isPaused = true;
+        cutscene.gameObject.SetActive(true);
+        video.Play();
+        video.loopPointReached += EndReached;
+    }
+
+    void EndReached(VideoPlayer vp)
+    {
+        SceneManager.LoadScene(sceneToSwitchTo);
     }
 
     private IEnumerator Erase()
