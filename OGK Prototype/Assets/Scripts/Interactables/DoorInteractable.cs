@@ -44,6 +44,7 @@ public class DoorInteractable : Interactable, IDoor
             promptMessage = doorText;
             ToggleDoor();
         }
+        TakeNote();
     }
 
     public void ToggleDoor()

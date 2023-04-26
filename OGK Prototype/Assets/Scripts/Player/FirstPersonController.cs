@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEditor.Experimental.GraphView;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 using NoteSystem;
@@ -37,6 +38,10 @@ namespace StarterAssets
         public GameObject menuI;
         [Tooltip("UI settings for the inventory")]
         public NoteSystem.NotesSystem menuJ;
+		[SerializeField]
+		public Note startingNote;
+        [SerializeField]
+        public string startingText;
 
         [Space(10)]
         [Tooltip("Determines whether or not the player can jump")]
@@ -136,7 +141,15 @@ namespace StarterAssets
 
             inventory = new Inventory();
 			uiInventory.SetPlayer(this);
-            uiInventory.SetInventory(inventory);
+			uiInventory.SetInventory(inventory);
+            for (int i = startingNote.Pages.Length - 1; i >= 0; i--)
+			{
+				DestroyImmediate(startingNote.Pages[i], true);
+            }
+            Debug.Log(startingText);
+            Debug.Log("Reset Text");
+            startingNote.Pages[0].text = startingText;
+			NotesSystem.AddNote(startingNote.Label, startingNote);
         }
 
         private void Update()

@@ -11,6 +11,8 @@ namespace NoteSystem
         [SerializeField] bool autoDisplay = false;
         [SerializeField] bool add = true;
 
+        [SerializeField] bool delete;
+
         protected override void Interact()
         {
             if (autoDisplay)
@@ -20,7 +22,9 @@ namespace NoteSystem
             if (add)
             {
                 NotesSystem.AddNote(note.Label, note);
-                Destroy(gameObject);
+                TakeNote();
+                if(delete)
+                    Destroy(gameObject);
             }
         }
     }

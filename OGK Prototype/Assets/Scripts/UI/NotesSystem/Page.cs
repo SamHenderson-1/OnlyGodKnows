@@ -11,7 +11,7 @@ namespace NoteSystem
         public PageType Type { get { return type; } }
 
         [TextArea(8, 16)]
-        [SerializeField] string text = string.Empty;
+        [SerializeField] public string text = string.Empty;
         public string Text { get { return text; } }
 
         [SerializeField] Sprite texture = null;
