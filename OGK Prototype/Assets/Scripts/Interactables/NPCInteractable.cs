@@ -12,18 +12,17 @@ public class NPCInteractable : Interactable
     [SerializeField]
     private TextMeshProUGUI npcText;
     [SerializeField]
-    private Script[] dialogue;
+    private string[] dialogue;
 
     protected override void Interact()
     {
-        npcText.color = dialogue[interactionCounter].color;
-        npcText.text = dialogue[interactionCounter].line;
+        npcText.text = dialogue[interactionCounter];
         StartCoroutine("Erase");
     }
 
     private IEnumerator Erase()
     {
-        yield return new WaitForSeconds(dialogue[interactionCounter].line.Split(' ').Length*0.3f + 1f);
+        yield return new WaitForSeconds(dialogue[interactionCounter].Split(' ').Length*0.3f + 3f);
         npcText.text = "";
     }
 }

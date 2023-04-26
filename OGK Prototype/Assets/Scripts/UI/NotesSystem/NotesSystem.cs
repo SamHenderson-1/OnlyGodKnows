@@ -62,7 +62,7 @@ namespace NoteSystem
         [SerializeField] FirstPersonController player;
 
         private static Dictionary<string, Note> Notes = new Dictionary<string, Note>();
-        private List<NoteData> noteDatas = new List<NoteData>();
+        public List<NoteData> noteDatas = new List<NoteData>();
         private static Action<Note> A_Display = delegate { };
         #endregion
 
