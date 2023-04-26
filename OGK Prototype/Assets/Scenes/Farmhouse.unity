@@ -17047,26 +17047,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1668213886760505508, guid: 21710b4bf2c97274fb48268e11971843, type: 3}
---- !u!1 &463026717 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3989101281458790213, guid: ccf5fe40bb7ea4e41b38a2aa0d2a91f2,
-    type: 3}
-  m_PrefabInstance: {fileID: 1455440782}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &463026723
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 463026717}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &463877489 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0b3abbdfdf309c7478473fe38f56522e,
@@ -54739,6 +54719,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scene Switcher
       objectReference: {fileID: 0}
+    - target: {fileID: 3989101281458790218, guid: ccf5fe40bb7ea4e41b38a2aa0d2a91f2,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1752792685}
+    - target: {fileID: 3989101281458790218, guid: ccf5fe40bb7ea4e41b38a2aa0d2a91f2,
+        type: 3}
+      propertyPath: sceneToSwitchTo
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3989101281458790222, guid: ccf5fe40bb7ea4e41b38a2aa0d2a91f2,
         type: 3}
       propertyPath: m_RootOrder
@@ -54794,7 +54784,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3989101281458790217, guid: ccf5fe40bb7ea4e41b38a2aa0d2a91f2, type: 3}
+    - {fileID: 3989101281458790216, guid: ccf5fe40bb7ea4e41b38a2aa0d2a91f2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ccf5fe40bb7ea4e41b38a2aa0d2a91f2, type: 3}
 --- !u!64 &1455669860
 MeshCollider:
