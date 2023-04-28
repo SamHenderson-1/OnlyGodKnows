@@ -18,6 +18,8 @@ public class SceneSwitch : Interactable
     VideoPlayer video;
     [SerializeField]
     RawImage cutscene;
+    [SerializeField]
+    UIManager pauser;
 
     protected override void Interact()
     {
@@ -43,8 +45,12 @@ public class SceneSwitch : Interactable
     private void Transition() {
         promptMessage = "";
         UIManager.isPaused = true;
+        Debug.Log(UIManager.isPaused);
         cutscene.gameObject.SetActive(true);
         video.Play();
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+            GameObject.Destroy(enemy);
         video.loopPointReached += EndReached;
     }
 
