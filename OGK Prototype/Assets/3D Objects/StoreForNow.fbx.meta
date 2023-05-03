@@ -3,7 +3,27 @@ guid: 0e4d4a29f0fcce1428beb9a00bc874d8
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ChipsShelf
+    second: {fileID: 2100000, guid: 4f05ea76b8b09b24cafa8a3e183b1ba5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ConveneinceStoreSign
+    second: {fileID: 2100000, guid: 32d39033b4e031c41a3dbf1fd4342f68, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StoreFloorTile
+    second: {fileID: 2100000, guid: 32b97ab311a708b4083fea4a34f998e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: c667a43d22d17ca449e9eecfd49003be, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
