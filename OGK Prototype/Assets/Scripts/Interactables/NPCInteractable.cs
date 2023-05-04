@@ -22,7 +22,7 @@ public class NPCInteractable : Interactable
 
     private IEnumerator Erase()
     {
-        yield return new WaitForSeconds(dialogue[interactionCounter].Split(' ').Length*0.3f + 3f);
+       yield return new WaitForSeconds(dialogue[interactionCounter].Split(' ').Length*0.3f + 3f);
         npcText.text = "";
     }
 }
