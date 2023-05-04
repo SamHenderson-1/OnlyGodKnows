@@ -31,7 +31,7 @@ public class SceneSwitch : Interactable
         player.startingText = player.startingNote.Pages[0].text;
         if (requiresNote)
         {
-            if (player.menuJ.noteDatas.Count == 3)
+            if (player.menuJ.noteDatas.Count >= 3)
                 SceneManager.LoadScene(sceneToSwitchTo);
             else
                 holdMessage = promptMessage;
