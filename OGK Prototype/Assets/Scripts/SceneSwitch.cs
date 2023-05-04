@@ -18,6 +18,13 @@ public class SceneSwitch : Interactable
     VideoPlayer video;
     [SerializeField]
     RawImage cutscene;
+    GameObject[] enemies;
+    [SerializeField]
+    SoundTrigger soundTrigger;
+    private void Start()
+    {
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+    }
 
     protected override void Interact()
     {
@@ -41,6 +48,9 @@ public class SceneSwitch : Interactable
         }
     }
     private void Transition() {
+        soundTrigger.playSound.Stop();
+        foreach (GameObject enemy in enemies)
+            GameObject.Destroy(enemy);
         promptMessage = "";
         UIManager.isPaused = true;
         cutscene.gameObject.SetActive(true);

@@ -35,7 +35,8 @@ public class LockControl : MonoBehaviour
             Debug.Log(result[i]);
         if (Enumerable.SequenceEqual(result, correctCombination)) 
         {
-            Debug.Log("Opened!");
+            Inspectable text = this.gameObject.GetComponent<Inspectable>();
+            text.promptMessage = "I got it unlocked!";
             lockState = false;
         }
     }

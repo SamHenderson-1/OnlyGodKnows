@@ -54,7 +54,6 @@ public class EnemyBasicAI : MonoBehaviour
 
     private void Update()
     {
-
         if (!UIManager.isPaused) {
             EnviromentView();                       //  Check whether or not the player is in the enemy's field of vision
 
